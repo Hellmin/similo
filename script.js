@@ -1,20 +1,65 @@
 // стартовые переменные
-// база жпегов сыщиков
+// база сыщиков и их позиции на чартлисте
 const svarschiki = [
-    'roland', 'daisy', 'skids', 'agnes', 'wendy',
-    'zoey', 'rex', 'jenny', 'jim', 'pete',
-    'mark', 'mihn', 'sefina', 'akachi', 'william', 'lola',
-    'leo', 'ursula', 'finn', 'mateo', 'calvin',
-    'carolyn', 'joe', 'preston', 'diana', 'rita', 'marie',
-    'daniela', 'norman', 'monterey', 'lily', 'bob',
-    'carson', 'vincent', 'kymani', 'amina', 'darell', 'charley',
-    'nathaniel', 'harvey', 'winifred', 'jacqueline', 'stella'
+    {name:'roland', posx: '0px', posy: '0px'},
+    {name:'daisy', posx: '-120px', posy: '0px'},
+    {name:'skids', posx: '-240px', posy: '0px'},
+    {name:'agnes', posx: '-360px', posy: '0px'},
+    {name:'wendy', posx: '-480px', posy: '0px'},
+
+    {name:'zoey', posx: '0px', posy: '-180px'},
+    {name:'rex', posx: '-120px', posy: '-180px'},
+    {name:'jenny', posx: '-240px', posy: '-180px'},
+    {name:'jim', posx: '-360px', posy: '-180px'},
+    {name:'pete', posx: '-480px', posy: '-180px'},
+
+    {name:'mark', posx: '0px', posy: '-360px'},
+    {name:'mihn', posx: '-120px', posy: '-360px'},
+    {name:'sefina', posx: '-240px', posy: '-360px'},
+    {name:'akachi', posx: '-360px', posy: '-360px'},
+    {name:'william', posx: '-480px', posy: '-360px'},
+    {name:'lola', posx: '-600px', posy: '0px'},
+    
+    {name:'leo', posx: '0px', posy: '-540px'},
+    {name:'ursula', posx: '-120px', posy: '-540px'},
+    {name:'finn', posx: '-240px', posy: '-540px'},
+    {name:'mateo', posx: '-360px', posy: '-540px'},
+    {name:'calvin', posx: '-480px', posy: '-540px'},
+
+    {name:'carolyn', posx: '0px', posy: '-720px'},
+    {name:'joe', posx: '-120px', posy: '-720px'},
+    {name:'preston', posx: '-240px', posy: '-720px'},
+    {name:'diana', posx: '-360px', posy: '-720px'},
+    {name:'rita', posx: '-480px', posy: '-720px'},
+    {name:'marie', posx: '-600px', posy: '-180px'},
+    
+    {name:'daniela', posx: '0px', posy: '-1260px'},
+    {name:'norman', posx: '-120px', posy: '-1260px'},
+    {name:'monterey', posx: '-240px', posy: '-1260px'},
+    {name:'lily', posx: '-360px', posy: '-1260px'},
+    {name:'bob', posx: '-480px', posy: '-1260px'},
+        
+    {name:'carson', posx: '0px', posy: '-1440px'},
+    {name:'vincent', posx: '-120px', posy: '-1440px'},
+    {name:'kymani', posx: '-240px', posy: '-1440px'},
+    {name:'amina', posx: '-360px', posy: '-1440px'},
+    {name:'darell', posx: '-480px', posy: '-1440px'},
+    {name:'charley', posx: '-600px', posy: '-1260px'},
+
+    {name:'nathaniel', posx: '-600px', posy: '-360px'},
+    {name:'harvey', posx: '-600px', posy: '-540px'},
+    {name:'winifred', posx: '-600px', posy: '-720px'},
+    {name:'jacqueline', posx: '-600px', posy: '-900px'},
+    {name:'stella', posx: '-600px', posy: '-1080px'},
 ];
 // массивы карт на поле, в руке, подсказок
 const fieldCards = [];
 const handCards = [];
 const hintCards = [];
 let counterNumber = 0;
+const HIDDEN_POS_X = '-600px';
+const HIDDEN_POS_Y = '-1440px';
+const IMAGE = `url('./pic/investigators.jpg`;
 // игровые зоны
 const field = document.getElementById('field');
 const hints = document.getElementById('hints');
@@ -31,7 +76,6 @@ rules.onclick = function(){
     rules.classList.toggle('hide-rules');
 }
 
-
 // мешаем список, загадываем карту
 shuffle( svarschiki );
 const nemesisCard = svarschiki.shift();
@@ -47,12 +91,26 @@ setNemesis();
 takeStartHand();
 countGuesses();
 
+// функция создания карты
+function craftCard(name, posx, posy){
+    const card = document.createElement('div');    
+    card.classList.add('card');
+    card.setAttribute('name', name);
+    card.setAttribute('posx', posx);
+    card.setAttribute('posy', posy);
+    card.style.backgroundImage = IMAGE;
+    card.style.backgroundPositionX = card.getAttribute('posx');
+    card.style.backgroundPositionY = card.getAttribute('posy');
+    return card;    
+}
+
 // функция добавляющая загаданную карту в её поле
 function setNemesis(){ 
-    const card = document.createElement('div');
-    card.classList.add('card');
+    const {name, posx, posy} = nemesisCard;
+   
+    const card = craftCard(name, posx, posy);    
     card.classList.add('nemesis');
-    card.style.backgroundImage = `url('./pic/${nemesisCard}.jpg`
+    
     nemesis.append(card)       
 }
 
@@ -72,17 +130,17 @@ function takeCard(){
 // функция получения списка карт и добавления её на поле
 function getHand(){ 
     hand.innerHTML= '';
-    handCards.forEach(sich => {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.setAttribute('name', sich);
-        card.style.backgroundImage = `url('./pic/${sich}.jpg`;
+    handCards.forEach(svarschik => {
+        const {name, posx, posy} = svarschik;
+        const card = craftCard(name, posx, posy);
+        
         card.addEventListener('click',()=>{
             if (counterNumber == 0){
                 putFromHand(card);
                 addHint(card); 
             }
         })
+
         hand.append(card)       
     });
 }
@@ -90,8 +148,9 @@ function getHand(){
 // функция "выкладывания карты из руки", удаляет нажатую карту из массива руки
 function putFromHand(card){
     for(i=0; i < handCards.length; i++){
-        if(handCards[i] == card.getAttribute('name')){
+        if(handCards[i].name == card.getAttribute('name')){
             handCards.splice(i,1);
+            return;
         }
     }
 }
@@ -113,20 +172,20 @@ function makeHintField() {
     hints.innerHTML = '';
     for ( i = 0; i < hintCards.length; i++ ){
         // создание карты подсказки
-        const card = document.createElement('div');
-        card.classList.add('card');
+        const [svarschik, rotate] = hintCards[i];
+        const name = svarschik.getAttribute('name');
+        const posx = svarschik.getAttribute('posx');
+        const posy = svarschik.getAttribute('posy');
+        const card = craftCard(name, posx, posy);
+
         card.classList.add('hint-card');
-        // получаем имя карты и состояние подсказки, добавляем в карту
-        hintCards[i][3] = i; //индекс карты в атрибут
-        const [hand, rotate] = hintCards[i];
-        cardName = hand.getAttribute('name');
-        card.setAttribute('name', cardName);
         card.setAttribute('rotated', rotate);
+        card.setAttribute('index', i);
+        
         if (rotate) {
             card.classList.add('rotated');
         }
-        card.setAttribute('index', i);
-        card.style.backgroundImage = `url('./pic/${cardName}.jpg`
+        card.style.backgroundImage = IMAGE;
         // поворот карты по нажатию
         card.addEventListener('click', ()=>{
             card.classList.toggle('rotated');
@@ -143,14 +202,13 @@ function makeHintField() {
 // функция создания игрового поля
 function makeField() { 
     fieldCards.forEach(svarschik => {
+        const {name, posx, posy} = svarschik;
         // создаёт отдельно элементы карт с тригерами нажатия
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.setAttribute('name', svarschik)
-        card.style.backgroundImage = `url('./pic/${svarschik}.jpg`
+        const card = craftCard(name, posx, posy);
+
         card.addEventListener('click',()=>{
             // если нажатая карта = загаданная карта, не закрывать её
-            isNemesis = card.getAttribute('name') == nemesisCard;
+            isNemesis = card.getAttribute('name') == nemesisCard.name;
             if(isNemesis){
                 card.classList.toggle('wrong-card');
                 return;
@@ -158,9 +216,11 @@ function makeField() {
             // кривой переворот карты
             card.classList.toggle('hidden');
             if(card.classList.contains('hidden')){
-                card.style.backgroundImage = `url('./pic/hidden.jpg`
+                card.style.backgroundPositionX = HIDDEN_POS_X;
+                card.style.backgroundPositionY = HIDDEN_POS_Y;
             } else {
-                card.style.backgroundImage = `url('./pic/${svarschik}.jpg`
+                card.style.backgroundPositionX = card.getAttribute('posx');
+                card.style.backgroundPositionY = card.getAttribute('posy');
             }
             countGuesses();
         })
@@ -194,7 +254,7 @@ function countGuesses(){
         default:
             needToOpen = 0;
     }
-    counterNumber = hiddenCards.length == 11 ? 0 : needToOpen - hiddenCards.length;   
+    counterNumber = needToOpen - hiddenCards.length;   
     counter.innerHTML = counterNumber;
 }
 

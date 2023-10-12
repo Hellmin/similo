@@ -20,7 +20,7 @@ h2 {
     justify-content: center;
 }
 .hide-rules{
-    display:flex;
+    display: flex;
 }
 .rules {
     display: flex;
@@ -103,7 +103,7 @@ h2 {
     width: 120px;
     height: 180px;
     background-color: white;
-    background-size: cover;
+    background-size: auto;
     border-radius: 7%;
 }
 .hint-card {
@@ -113,9 +113,6 @@ h2 {
 .wrong-card {
     box-sizing: border-box;
     border: solid red 5px;
-}
-.hidden {
-    background-image: url('./pic/hidden.jpg');
 }
 .rotated {
     transform: rotate(90deg);
