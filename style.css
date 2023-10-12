@@ -1,0 +1,122 @@
+body {
+
+    background-color: black;
+}
+h2 {
+    margin: 0;
+}
+.container {
+    margin: 20px auto;
+    width: 1000px;
+}
+.rules-container {
+    margin: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+.hide-rules{
+    display:flex;
+}
+.rules {
+    display: flex;
+    padding: 20px;
+    max-width: 1000px;
+    flex-flow: column wrap;
+    background-color: grey;
+}
+.rules-header {
+    text-align: center;
+    margin: 0;
+}
+.rules-text {
+    margin: 0;
+    font-size: 20px;
+    text-align: center;
+}
+
+/* ИГРОВАЯ ЗОНА */
+.play-area {
+    padding: 20px 30px;
+    background-color: darkslategrey;
+}
+.play-cards {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.play-headers {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+#field {
+    display: flex;
+    flex-flow: row wrap;
+    width: 488px;
+}
+#counter {
+    width: 50px;
+    font-size: 60px;
+    font-weight: bold;
+    color: white;
+    text-shadow:black 2px 2px;
+    text-align: center;
+}
+#hints {
+    width: 320px;
+    height: 540px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+}
+
+/* ЗОНА ВЕДУЩЕГО */
+.hand-area {
+    background-color: darkolivegreen;
+    padding: 20px 30px;
+}
+.hand-headers {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.hand-cards {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+#hand {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+/* КЛАССЫ КАРТ */
+.card {
+    margin: 1px;
+    width: 120px;
+    height: 180px;
+    background-color: white;
+    background-size: cover;
+    border-radius: 7%;
+}
+.hint-card {
+    margin: 0 20px;
+}
+.nemesis,
+.wrong-card {
+    box-sizing: border-box;
+    border: solid red 5px;
+}
+.hidden {
+    background-image: url('./pic/hidden.jpg');
+}
+.rotated {
+    transform: rotate(90deg);
+}
