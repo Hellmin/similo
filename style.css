@@ -42,7 +42,7 @@ h2 {
 /* ИГРОВАЯ ЗОНА */
 .play-area {
     padding: 20px 30px;
-    background-color: darkslategrey;
+    background-color: #095257;
 }
 .play-cards {
     display: flex;
@@ -62,10 +62,10 @@ h2 {
 }
 #counter {
     width: 50px;
-    font-size: 60px;
-    font-weight: bold;
+    font-size: 90px;
+    font-weight: 800;
     color: white;
-    text-shadow:black 2px 2px;
+    text-shadow:black 3px 3px;
     text-align: center;
 }
 #hints {
@@ -104,16 +104,21 @@ h2 {
     height: 180px;
     background-color: white;
     background-size: auto;
+    border: 2px solid black;
+    box-sizing: border-box;
     border-radius: 7%;
+    box-shadow: 8px 8px 8px 0px rgba(0, 0, 0, 0.7);
 }
 .hint-card {
     margin: 0 20px;
 }
 .nemesis,
 .wrong-card {
-    box-sizing: border-box;
-    border: solid red 5px;
+    border: none;
+    outline: 10px ridge greenyellow;
+    z-index: 10;
 }
 .rotated {
     transform: rotate(90deg);
+    box-shadow: 8px -8px 8px 0px rgba(0, 0, 0, 0.7);
 }

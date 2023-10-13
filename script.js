@@ -13,41 +13,53 @@ const svarschiki = [
     {name:'jim', posx: '-360px', posy: '-180px'},
     {name:'pete', posx: '-480px', posy: '-180px'},
 
-    {name:'mark', posx: '0px', posy: '-360px'},
-    {name:'mihn', posx: '-120px', posy: '-360px'},
-    {name:'sefina', posx: '-240px', posy: '-360px'},
-    {name:'akachi', posx: '-360px', posy: '-360px'},
-    {name:'william', posx: '-480px', posy: '-360px'},
+    {name:'mark', posx: '0px', posy: '-361px'},
+    {name:'mihn', posx: '-120px', posy: '-361px'},
+    {name:'sefina', posx: '-240px', posy: '-361px'},
+    {name:'akachi', posx: '-360px', posy: '-361px'},
+    {name:'william', posx: '-480px', posy: '-361px'},
     {name:'lola', posx: '-600px', posy: '0px'},
     
-    {name:'leo', posx: '0px', posy: '-540px'},
-    {name:'ursula', posx: '-120px', posy: '-540px'},
-    {name:'finn', posx: '-240px', posy: '-540px'},
-    {name:'mateo', posx: '-360px', posy: '-540px'},
-    {name:'calvin', posx: '-480px', posy: '-540px'},
+    {name:'leo', posx: '0px', posy: '-541px'},
+    {name:'ursula', posx: '-120px', posy: '-541px'},
+    {name:'finn', posx: '-240px', posy: '-541px'},
+    {name:'mateo', posx: '-360px', posy: '-541px'},
+    {name:'calvin', posx: '-480px', posy: '-541px'},
 
     {name:'carolyn', posx: '0px', posy: '-720px'},
     {name:'joe', posx: '-120px', posy: '-720px'},
     {name:'preston', posx: '-240px', posy: '-720px'},
     {name:'diana', posx: '-360px', posy: '-720px'},
     {name:'rita', posx: '-480px', posy: '-720px'},
-    {name:'marie', posx: '-600px', posy: '-180px'},
+    {name:'marie', posx: '-600px', posy: '-181px'},
     
-    {name:'daniela', posx: '0px', posy: '-1260px'},
-    {name:'norman', posx: '-120px', posy: '-1260px'},
-    {name:'monterey', posx: '-240px', posy: '-1260px'},
-    {name:'lily', posx: '-360px', posy: '-1260px'},
-    {name:'bob', posx: '-480px', posy: '-1260px'},
+    {name:'tommy', posx: '0px', posy: '-901px'},
+    {name:'mandy', posx: '-120px', posy: '-901px'},
+    {name:'tony', posx: '-240px', posy: '-901px'},
+    {name:'luke', posx: '-360px', posy: '-901px'},
+    {name:'patrice', posx: '-480px', posy: '-901px'},
         
-    {name:'carson', posx: '0px', posy: '-1440px'},
-    {name:'vincent', posx: '-120px', posy: '-1440px'},
-    {name:'kymani', posx: '-240px', posy: '-1440px'},
-    {name:'amina', posx: '-360px', posy: '-1440px'},
-    {name:'darell', posx: '-480px', posy: '-1440px'},
+    {name:'mary', posx: '0px', posy: '-1081px'},
+    {name:'amanda', posx: '-120px', posy: '-1081px'},
+    {name:'trish', posx: '-240px', posy: '-1081px'},
+    {name:'dexter', posx: '-360px', posy: '-1081px'},
+    {name:'silas', posx: '-480px', posy: '-1081px'},
+
+    {name:'daniela', posx: '0px', posy: '-1261px'},
+    {name:'norman', posx: '-120px', posy: '-1261px'},
+    {name:'monterey', posx: '-240px', posy: '-1261px'},
+    {name:'lily', posx: '-360px', posy: '-1261px'},
+    {name:'bob', posx: '-480px', posy: '-1261px'},
+        
+    {name:'carson', posx: '0px', posy: '-1441px'},
+    {name:'vincent', posx: '-120px', posy: '-1441px'},
+    {name:'kymani', posx: '-240px', posy: '-1441px'},
+    {name:'amina', posx: '-360px', posy: '-1441px'},
+    {name:'darell', posx: '-480px', posy: '-1441px'},
     {name:'charley', posx: '-600px', posy: '-1260px'},
 
     {name:'nathaniel', posx: '-600px', posy: '-360px'},
-    {name:'harvey', posx: '-600px', posy: '-540px'},
+    {name:'harvey', posx: '-600px', posy: '-541px'},
     {name:'winifred', posx: '-600px', posy: '-720px'},
     {name:'jacqueline', posx: '-600px', posy: '-900px'},
     {name:'stella', posx: '-600px', posy: '-1080px'},
@@ -58,7 +70,7 @@ const handCards = [];
 const hintCards = [];
 let counterNumber = 0;
 const HIDDEN_POS_X = '-600px';
-const HIDDEN_POS_Y = '-1440px';
+const HIDDEN_POS_Y = '-1441px';
 const IMAGE = `url('./pic/investigators.jpg`;
 // игровые зоны
 const field = document.getElementById('field');
