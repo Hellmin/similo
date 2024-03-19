@@ -8,7 +8,7 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="rules-container" id="rules">
+    <div class="popup-container" id="rules">
         <div class="rules">
             <h1 class="rules-header">Краткие правила Similo</h1>
             <p class="rules-text">
@@ -41,6 +41,23 @@
             </p>
         </div>
     </div>
+    <div class="popup-container" id="settings">
+        <div class="settings">
+             <div class="setting-btns">
+                <div class="setting-div">
+                    <button class="setting-btn true-btn" id="ruloka-false">Все сыщики в игре</button>
+                    <button class="setting-btn true-btn" id="cyclesuit-true">Показать "масти" циклов</button>
+                    <button class="setting-btn true-btn" id="firstname-true">Добавлять имена сыщиков</button>
+                </div>
+                <div class="setting-div">
+                    <button class="setting-btn false-btn" id="ruloka-true">Нелоки несуществует</button>
+                    <button class="setting-btn false-btn" id="cyclesuit-false">Матео определенно был в круге, ведь так?</button>
+                    <button class="setting-btn false-btn" id="firstname-false">Это Норман или Другой Норман?</button>
+                </div>
+            </div>
+            <button id="save-btn">Сохранить</button>
+        </div>
+    </div>
     <div class="container">
         <div class="play-area">
             <div class="play-cards">
@@ -50,13 +67,21 @@
             </div>
             <div class="play-headers">
                 <h2>Игровое поле</h2>
+                <div class="addons">
+                    <div id="cyclesuit-addon" class="addon"></div>
+                    <div id="ruloka-addon" class="addon"></div>
+                    <div id="firstname-addon" class="addon"></div>
+                </div>
                 <h2>Подсказки</h2>
             </div>
         </div>
         <div class="hand-area">
             <div class="hand-headers">
                 <h2>Загадана</h2>
-                <button id="help-button">Как этим управлять?</button>
+                <div id="support">
+                    <button id="help-button">Как этим управлять?</button>
+                    <button id="setting-button">Настройки</button>
+                </div>
                 <h2>Карты на руке</h2>
             </div>
             <div class="hand-cards">
