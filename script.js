@@ -1,4 +1,4 @@
-const VERSION = "v0.3";
+const VERSION = "v0.3.1";
 const verDiv = document.createElement('span');
 verDiv.innerText = VERSION;
 document.getElementById('support').append(verDiv)
@@ -37,17 +37,17 @@ const svarschiki = [
     {name:'rita', posx: '-480px', posy: '-720px', firstname: 'Рита', expansion: 4},
     {name:'marie', posx: '-600px', posy: '-181px', firstname: 'Мари', expansion: 4},
     
-    {name:'tommy', posx: '0px', posy: '-901px', firstname: 'Томми', neloka: true, expansion: 5},
-    {name:'mandy', posx: '-120px', posy: '-901px', firstname: 'Мэнди', neloka: true, expansion: 5},
-    {name:'tony', posx: '-240px', posy: '-901px', firstname: 'Тони', neloka: true, expansion: 5},
-    {name:'luke', posx: '-360px', posy: '-901px', firstname: 'Люк', neloka: true, expansion: 5},
-    {name:'patrice', posx: '-480px', posy: '-901px', firstname: 'Патрис', neloka: true, expansion: 5},
+    {name:'tommy', posx: '0px', posy: '-901px', firstname: 'Томми', expansion: 5, neloka: true},
+    {name:'mandy', posx: '-120px', posy: '-901px', firstname: 'Мэнди', expansion: 5, neloka: true},
+    {name:'tony', posx: '-240px', posy: '-901px', firstname: 'Тони', expansion: 5, neloka: true},
+    {name:'luke', posx: '-360px', posy: '-901px', firstname: 'Люк', expansion: 5, neloka: true},
+    {name:'patrice', posx: '-480px', posy: '-901px', firstname: 'Патрис', expansion: 5, neloka: true},
         
-    {name:'mary', posx: '0px', posy: '-1081px', firstname: 'Мэри', neloka: true, expansion: 6},
-    {name:'amanda', posx: '-120px', posy: '-1081px', firstname: 'Аманда', neloka: true, expansion: 6},
-    {name:'trish', posx: '-240px', posy: '-1081px', firstname: 'Триш', neloka: true, expansion: 6},
-    {name:'dexter', posx: '-360px', posy: '-1081px', firstname: 'Декстер', neloka: true, expansion: 6},
-    {name:'silas', posx: '-480px', posy: '-1081px', firstname: 'Сайлас', neloka: true, expansion: 6},
+    {name:'mary', posx: '0px', posy: '-1081px', firstname: 'Мэри', expansion: 6, neloka: true},
+    {name:'amanda', posx: '-120px', posy: '-1081px', firstname: 'Аманда', expansion: 6, neloka: true},
+    {name:'trish', posx: '-240px', posy: '-1081px', firstname: 'Триш', expansion: 6, neloka: true},
+    {name:'dexter', posx: '-360px', posy: '-1081px', firstname: 'Декстер', expansion: 6, neloka: true},
+    {name:'silas', posx: '-480px', posy: '-1081px', firstname: 'Сайлас', expansion: 6, neloka: true},
 
     {name:'nathaniel', posx: '-600px', posy: '-360px', firstname: 'Чо', expansion: 0},
     {name:'harvey', posx: '-600px', posy: '-541px', firstname: 'Харви', expansion: 0},
@@ -68,12 +68,13 @@ const svarschiki = [
     {name:'darell', posx: '-480px', posy: '-1441px', firstname: 'Дарелл', expansion: 8},
     {name:'charley', posx: '-600px', posy: '-1260px', firstname: 'Чарли', expansion: 8},
 
-    // {name:'wilson', posx: '-', posy: '-', firstname: 'Уилсон', neloka: true, expansion: 9},
-    // {name:'kate', posx: '-', posy: '-', firstname: 'Кейт', neloka: true, expansion: 9},
-    // {name:'alessandra', posx: '-', posy: '-', firstname: 'Алессандра', neloka: true, expansion: 9},
-    // {name:'kohaku', posx: '-', posy: '-', firstname: 'Кохаку', neloka: true, expansion: 9},
-    // {name:'hank', posx: '-', posy: '-', firstname: 'Хэнк', neloka: true, expansion: 9},
+    {name:'wilson', posx: '0', posy: '-1620px', firstname: 'Уилсон', expansion: 9, neloka: true},
+    {name:'kate', posx: '-120px', posy: '-1620px', firstname: 'Кейт', expansion: 9, neloka: true},
+    {name:'alessandra', posx: '-240px', posy: '-1620px', firstname: 'Алессандра', expansion: 9, neloka: true},
+    {name:'kohaku', posx: '-360px', posy: '-1620px', firstname: 'Кохаку', expansion: 9, neloka: true},
+    {name:'hank', posx: '-480px', posy: '-1620px', firstname: 'Хэнк', expansion: 9, neloka: true},
 ];
+
 // база иконок цикла
 const cycles = [
     [0,0], //база
@@ -88,11 +89,14 @@ const cycles = [
     [-90,30], //ключи
     [-120,30], //пирдолина
 ]
-//загрузка локальных настроек и установка базовых при их отстутствии
+
+// загрузка локальных настроек и установка базовых при их отстутствии
 if (localStorage.getItem('settings') === null ) {
     localStorage.setItem('settings', JSON.stringify({"ruloka":"false","firstname":"true","cyclesuit":"true"}) );
 }
 const SETTINGS = JSON.parse( localStorage.getItem('settings') );
+
+// убирает нелоку, если включена настройка
 if (SETTINGS.ruloka == "true") {
     for ( i = svarschiki.length-1 ; i >= 0 ; i--){
         if (svarschiki[i].neloka == true) {
@@ -101,7 +105,8 @@ if (SETTINGS.ruloka == "true") {
         }
     }
 }
-refreshAddons();
+updateAddons();
+setBtnEvents();
 
 // массивы карт на поле, в руке, подсказок
 const fieldCards = [];
@@ -111,70 +116,24 @@ let counterNumber = 0;
 const HIDDEN_POS_X = '-600px';
 const HIDDEN_POS_Y = '-1441px';
 const IMAGE = `url('./pic/investigators.jpg`;
+
 // игровые зоны
 const field = document.getElementById('field');
 const hints = document.getElementById('hints');
 const nemesis = document.getElementById('nemesis');
 const hand = document.getElementById('hand');
 const counter = document.getElementById('counter');
-// справочная 
-const helpBtn = document.getElementById('help-button');
-const rules = document.getElementById('rules');
-const settingBtn = document.getElementById('setting-button');
-helpBtn.onclick = function(){
-    rules.classList.toggle('unhide-popup');
-}
-rules.onclick = function(){
-    rules.classList.toggle('unhide-popup');
-}
-// настройки
-const settings = document.getElementById('settings');
-settingBtn.onclick = function(){
-    settings.classList.toggle('unhide-popup');
-}
-const saveBtn = document.getElementById('save-btn');
-saveBtn.onclick = function(){
-    window.location.reload();
-}
-document.getElementById('ruloka-true').onclick = function(){
-    SETTINGS.ruloka = "true";
-    localStorage.setItem('settings', JSON.stringify(SETTINGS));
-    refreshAddons();
-}
-document.getElementById('ruloka-false').onclick = function(){
-    SETTINGS.ruloka = "false";
-    localStorage.setItem('settings', JSON.stringify(SETTINGS));
-    refreshAddons();
-}
-document.getElementById('cyclesuit-true').onclick = function(){
-    SETTINGS.cyclesuit = "true";
-    localStorage.setItem('settings', JSON.stringify(SETTINGS));
-    refreshAddons();
-}
-document.getElementById('cyclesuit-false').onclick = function(){
-    SETTINGS.cyclesuit = "false";
-    localStorage.setItem('settings', JSON.stringify(SETTINGS));
-    refreshAddons();
-}
-document.getElementById('firstname-true').onclick = function(){
-    SETTINGS.firstname = "true";
-    localStorage.setItem('settings', JSON.stringify(SETTINGS));
-    refreshAddons();
-}
-document.getElementById('firstname-false').onclick = function(){
-    SETTINGS.firstname = "false";
-    localStorage.setItem('settings', JSON.stringify(SETTINGS));
-    refreshAddons();
-}
 
 // мешаем список, загадываем карту
 shuffle( svarschiki );
 const nemesisCard = svarschiki.shift();
 fieldCards.push( nemesisCard );
+
 // добавляем ещё 11 карт
 for( i=0; i<11; i++ ){
     fieldCards.push( svarschiki.shift() );
 }
+
 // мешаем, раскладываем, отдельно напоминалка загаданной карты, берём 5 карт в руку
 shuffle(fieldCards);
 makeField();
@@ -295,6 +254,10 @@ function makeHintField() {
         if (rotate) {
             card.classList.add('rotated');
         }
+        if ( i == hintCards.length - 1) {
+            card.classList.add('last-hint');
+        }
+
         card.style.backgroundImage = IMAGE;
         // поворот карты по нажатию
         card.addEventListener('click', ()=>{
@@ -393,19 +356,10 @@ function shuffle(array) {
 }
 
 // обновляет отображение включенных аддонов
-function refreshAddons(){
-    const cyclesuitAddon = document.getElementById('cyclesuit-addon');
+function updateAddons(){
     const rulokaAddon = document.getElementById('ruloka-addon');
-    const firstnameAddon = document.getElementById('firstname-addon');
-
     const rulokaBtnTrue = document.getElementById('ruloka-true');
-    const cyclesuitBtnTrue = document.getElementById('cyclesuit-true');
-    const firstnameBtnTrue = document.getElementById('firstname-true');
-
     const rulokaBtnFalse = document.getElementById('ruloka-false');
-    const cyclesuitBtnFalse = document.getElementById('cyclesuit-false');
-    const firstnameBtnFalse = document.getElementById('firstname-false');
-
     if (SETTINGS.ruloka == "false") {
         rulokaAddon.classList.add('addon-hidden');
         rulokaBtnTrue.classList.remove('active-btn');
@@ -415,6 +369,9 @@ function refreshAddons(){
         rulokaBtnTrue.classList.add('active-btn');
     }
 
+    const cyclesuitAddon = document.getElementById('cyclesuit-addon');
+    const cyclesuitBtnTrue = document.getElementById('cyclesuit-true');
+    const cyclesuitBtnFalse = document.getElementById('cyclesuit-false');
     if (SETTINGS.cyclesuit === "false") {
         cyclesuitAddon.classList.add('addon-hidden');
         cyclesuitBtnTrue.classList.remove('active-btn');
@@ -424,6 +381,9 @@ function refreshAddons(){
         cyclesuitBtnFalse.classList.remove('active-btn');        
     }
 
+    const firstnameAddon = document.getElementById('firstname-addon');
+    const firstnameBtnTrue = document.getElementById('firstname-true');
+    const firstnameBtnFalse = document.getElementById('firstname-false');
     if (SETTINGS.firstname === "false") {
         firstnameAddon.classList.add('addon-hidden');
         firstnameBtnTrue.classList.remove('active-btn');
@@ -431,5 +391,55 @@ function refreshAddons(){
     } else {
         firstnameBtnTrue.classList.add('active-btn');
         firstnameBtnFalse.classList.remove('active-btn');        
+    }
+}
+
+// установка функций кнопок
+function setBtnEvents(){
+    // справочная 
+    document.getElementById('setting-button').onclick = function(){
+        document.getElementById('settings').classList.toggle('unhide-popup');
+    }
+    document.getElementById('save-btn').onclick = function(){
+        window.location.reload();
+    }
+    const rules = document.getElementById('rules');
+    document.getElementById('help-button').onclick = function(){
+        rules.classList.toggle('unhide-popup');
+    }
+    rules.onclick = function(){
+        rules.classList.toggle('unhide-popup');
+    }
+
+    // кнопки настроек
+    document.getElementById('ruloka-true').onclick = function(){
+        SETTINGS.ruloka = "true";
+        localStorage.setItem('settings', JSON.stringify(SETTINGS));
+        updateAddons();
+    }
+    document.getElementById('ruloka-false').onclick = function(){
+        SETTINGS.ruloka = "false";
+        localStorage.setItem('settings', JSON.stringify(SETTINGS));
+        updateAddons();
+    }
+    document.getElementById('cyclesuit-true').onclick = function(){
+        SETTINGS.cyclesuit = "true";
+        localStorage.setItem('settings', JSON.stringify(SETTINGS));
+        updateAddons();
+    }
+    document.getElementById('cyclesuit-false').onclick = function(){
+        SETTINGS.cyclesuit = "false";
+        localStorage.setItem('settings', JSON.stringify(SETTINGS));
+        updateAddons();
+    }
+    document.getElementById('firstname-true').onclick = function(){
+        SETTINGS.firstname = "true";
+        localStorage.setItem('settings', JSON.stringify(SETTINGS));
+        updateAddons();
+    }
+    document.getElementById('firstname-false').onclick = function(){
+        SETTINGS.firstname = "false";
+        localStorage.setItem('settings', JSON.stringify(SETTINGS));
+        updateAddons();
     }
 }

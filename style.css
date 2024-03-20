@@ -147,14 +147,14 @@ h2 {
     margin: 1px;
     width: 120px;
     height: 180px;
-    background-color: white;
+    background-color: black;
     background-size: auto;
     border: 2px solid black;
     box-sizing: border-box;
     border-radius: 7%;
     box-shadow: 8px 8px 8px 0px rgba(0, 0, 0, 0.7);
     color: white;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     font-family: sans-serif;
     text-align: center;
@@ -183,7 +183,11 @@ h2 {
     z-index: 10;
 }
 .rotated {
-    /* transform: rotate(90deg); */
     box-shadow: 8px -8px 8px 0px rgba(0, 0, 0, 0.7);
     rotate: 90deg;
+}
+.last-hint {
+    border: none;
+    outline: 5px ridge lightskyblue;
+    z-index: 10;    
 }
