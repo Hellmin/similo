@@ -1,4 +1,4 @@
-const VERSION = "v0.3.1";
+const VERSION = "v0.3.2";
 const verDiv = document.createElement('span');
 verDiv.innerText = VERSION;
 document.getElementById('support').append(verDiv)
@@ -68,11 +68,11 @@ const svarschiki = [
     {name:'darell', posx: '-480px', posy: '-1441px', firstname: 'Дарелл', expansion: 8},
     {name:'charley', posx: '-600px', posy: '-1260px', firstname: 'Чарли', expansion: 8},
 
-    {name:'wilson', posx: '0', posy: '-1620px', firstname: 'Уилсон', expansion: 9, neloka: true},
-    {name:'kate', posx: '-120px', posy: '-1620px', firstname: 'Кейт', expansion: 9, neloka: true},
-    {name:'alessandra', posx: '-240px', posy: '-1620px', firstname: 'Алессандра', expansion: 9, neloka: true},
-    {name:'kohaku', posx: '-360px', posy: '-1620px', firstname: 'Кохаку', expansion: 9, neloka: true},
-    {name:'hank', posx: '-480px', posy: '-1620px', firstname: 'Хэнк', expansion: 9, neloka: true},
+    {name:'wilson', posx: '0', posy: '-1620px', firstname: 'Уилсон', expansion: 9},
+    {name:'kate', posx: '-120px', posy: '-1620px', firstname: 'Кейт', expansion: 9},
+    {name:'alessandra', posx: '-240px', posy: '-1620px', firstname: 'Алессандра', expansion: 9},
+    {name:'kohaku', posx: '-360px', posy: '-1620px', firstname: 'Кохаку', expansion: 9},
+    {name:'hank', posx: '-480px', posy: '-1620px', firstname: 'Хэнк', expansion: 9},
 ];
 
 // база иконок цикла
